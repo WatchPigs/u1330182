@@ -2,7 +2,7 @@
 #include "CppUnitTest.h"
 
 #include <assert.h>
-#include "../Engine/Point2D.h"
+#include "Point2D.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

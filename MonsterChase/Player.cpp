@@ -1,9 +1,10 @@
 #include "Player.h"
+#include "GlobalSettings.h"
 #include <iostream>
 #include <iomanip>
 using namespace std;
 
-Player::Player(int x, int y) : GameObject(x, y)
+Player::Player(int x, int y) : GameObject(x, y, 0, RANGE, 0, RANGE)
 {
 
 }

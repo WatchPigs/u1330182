@@ -2,10 +2,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include "Monster.h"
+#include "GlobalSettings.h"
 #include <iostream>
 using namespace std;
 
-Monster::Monster(char name[], int x, int y, int lifetime) : GameObject(x, y)
+Monster::Monster(char name[], int x, int y, int lifetime) : GameObject(x, y, 0, RANGE, 0, RANGE)
 {
 	m_name = new char[strlen(name)+1];
 	for (int i = 0; i <= (int)strlen(name); i++)
