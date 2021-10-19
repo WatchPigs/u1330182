@@ -15,7 +15,7 @@ int main()
     MonstersManager monsterManager;
 
     srand((unsigned int)time(NULL));
-    cout << "How many monsters?";
+    cout << "How many monsters? ";
     char cnum[100];
     cin.getline(cnum, 100);
     int num = atoi(cnum);
@@ -27,7 +27,7 @@ int main()
         monsterManager.Add(new Monster(tempName, (int)rand() % RANGE, (int)rand() % RANGE, LIFETIME));
     }
 
-    cout << "Player's name?" << endl;
+    cout << "Player's name? ";
     char tempName[100];
     cin.getline(tempName, 100);
     Player player(tempName, 0, 0);
