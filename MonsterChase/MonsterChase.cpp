@@ -13,7 +13,6 @@ using namespace std;
 int main()
 {
     MonstersManager monsterManager;
-    Player player((int)rand() % RANGE, (int)rand() % RANGE);
 
     srand((unsigned int)time(NULL));
     cout << "How many monsters?";
@@ -22,11 +21,16 @@ int main()
     int num = atoi(cnum);
     for (int i = 0; i < num; i++)
     {
-        cout << "name of " << i << "? ";
+        cout << "Name of " << i << "? ";
         char tempName[100];
         cin.getline(tempName, 100);
         monsterManager.Add(new Monster(tempName, (int)rand() % RANGE, (int)rand() % RANGE, LIFETIME));
     }
+
+    cout << "Player's name?" << endl;
+    char tempName[100];
+    cin.getline(tempName, 100);
+    Player player(tempName, 0, 0);
     
 
     while (true)
@@ -35,10 +39,19 @@ int main()
         monsterManager.Print();
         player.Print();
 
-        cout << "Press A to move left, D to move right, W to move up, S to move down or Q to quit" << endl;
+        cout << "Press A to move left, D to move right, W to move up, S to move down, M to create a new monster, Q to quit" << endl;
 
         bool quit = false;
         char c = _getch();
+
+        while (c != 'q' && c != 'w' && c != 'a' && c != 's' && c != 'd' && c != 'm')
+        {
+            cout << "Invalid Input" << endl;
+            c = _getch();
+        }
+
+        cout << endl;
+
         switch (c)
         {
         case 'q':
@@ -67,7 +80,7 @@ int main()
             monsterManager.Add(new Monster(tempName, (int)rand() % RANGE, (int)rand() % RANGE, LIFETIME));
             break;
         default:
-            cout << "Invalid Input" << endl;
+            cout << "Invalid" << endl;
         }
         if (quit) break;
 

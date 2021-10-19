@@ -26,13 +26,13 @@ void Point2D::SetY(int y)
 	m_y = y;
 }
 
-void Point2D::operator+=(Point2D& other)
+void Point2D::operator+=(const Point2D& other)
 {
 	m_x += other.GetX();
 	m_y += other.GetY();
 }
 
-void Point2D::operator-=(Point2D& other)
+void Point2D::operator-=(const Point2D& other)
 {
 	m_x -= other.GetX();
 	m_y -= other.GetY();

@@ -105,6 +105,7 @@ void MonstersManager::MonstersAct()
 		if (it->self->GetLifetime() == 0)
 		{
 			it = it->next;
+			cout << temp->self->GetName() << " ran out of its lifetime and dead" << endl;
 			Remove(temp);
 		}
 		else

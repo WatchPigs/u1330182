@@ -11,8 +11,8 @@ public:
 	int GetY() const;
 	void SetX(int x);
 	void SetY(int y);
-	void operator+=(Point2D& other);
-	void operator-=(Point2D& other);
+	void operator+=(const Point2D& other);
+	void operator-=(const Point2D& other);
 	void operator*=(int i);
 	void operator/=(int i);
 	Point2D operator*(int i) const;

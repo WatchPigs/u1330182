@@ -1,6 +1,6 @@
 #include "GameObject.h"
 
-GameObject::GameObject(int x, int y, int minX, int maxX, int minY, int maxY) : m_point(__clamp(m_RangeMinX, m_RangeMaxX, x), __clamp(m_RangeMinY, m_RangeMaxY, y))
+GameObject::GameObject(int x, int y, int minX, int maxX, int minY, int maxY) : m_point(__clamp(minX, maxX, x), __clamp(minY, maxY, y))
 {
 	m_RangeMinX = minX;
 	m_RangeMaxX = maxX;
