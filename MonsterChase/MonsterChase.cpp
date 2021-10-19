@@ -22,7 +22,7 @@ int main()
     for (int i = 0; i < num; i++)
     {
         cout << "Name of " << i << "? ";
-        char tempName[100];
+        char tempName[100]; //this is just a temporary variable to store a name, exact memory will be allocated in the constructor of objects.
         cin.getline(tempName, 100);
         monsterManager.Add(new Monster(tempName, (int)rand() % RANGE, (int)rand() % RANGE, LIFETIME));
     }
@@ -30,12 +30,14 @@ int main()
     cout << "Player's name? ";
     char tempName[100];
     cin.getline(tempName, 100);
-    Player player(tempName, 0, 0);
+    Player player(tempName, 50, 50);
     
 
     while (true)
     {
         cout << endl;
+        cout << "---------------------------------------------------" << endl;
+        cout << "Area range: x in [0, "<< RANGE << "], y in [0, "<<RANGE<<"]" << endl;
         monsterManager.Print();
         player.Print();
 
@@ -95,14 +97,3 @@ int main()
 
     return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
