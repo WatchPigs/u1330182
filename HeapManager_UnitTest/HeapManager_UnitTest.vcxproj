@@ -115,6 +115,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Heap Allocator-$(PlatformTarget)-$(Configuration).lib;$(SolutionDir)\Heap Allocator\$(Platform)\$(Configuration)\*.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -166,6 +167,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Heap Allocator\Heap Allocator.vcxproj">
+      <Project>{45bc52e3-69a0-4878-b800-0cd074bafb04}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
