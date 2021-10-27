@@ -4,7 +4,6 @@
 #include "HeapManagerProxy.h"
 #include <Windows.h>
 
-#include <assert.h>
 #include <algorithm>
 #include <vector>
 
@@ -34,18 +33,17 @@ namespace HeapManagerUnitTest
 			SYSTEM_INFO SysInfo;
 			GetSystemInfo(&SysInfo);
 			// round our size to a multiple of memory page size
-			assert(SysInfo.dwPageSize > 0);
+			Assert::IsTrue(SysInfo.dwPageSize > 0);
 			size_t sizeHeapInPageMultiples = SysInfo.dwPageSize * ((sizeHeap + SysInfo.dwPageSize) / SysInfo.dwPageSize);
 			void* pHeapMemory = VirtualAlloc(NULL, sizeHeapInPageMultiples, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
 #endif
-			assert(pHeapMemory);
+			Assert::IsTrue(pHeapMemory);
 
 			// Create a heap manager for my test heap.
 			HeapManager* pHeapManager = CreateHeapManager(pHeapMemory, sizeHeap, numDescriptors);
-			assert(pHeapManager);
+			Assert::IsTrue(pHeapManager);
 
-			if (pHeapManager == nullptr)
-				return false;
+			Assert::IsNotNull(pHeapManager);
 
 #ifdef TEST_SINGLE_LARGE_ALLOCATION
 			// This is a test I wrote to check to see if using the whole block if it was almost consumed by 
@@ -73,10 +71,10 @@ namespace HeapManagerUnitTest
 
 					size_t largestAfterAlloc = GetLargestFreeBlock(pHeapManager);
 					bool success = Contains(pHeapManager, pPtr) && IsAllocated(pHeapManager, pPtr);
-					assert(success);
+					Assert::IsTrue(success);
 
 					success = free(pHeapManager, pPtr);
-					assert(success);
+					Assert::IsTrue(success);
 
 					Collect(pHeapManager);
 
@@ -121,7 +119,7 @@ namespace HeapManagerUnitTest
 				void* pPtr = alloc(pHeapManager, sizeAlloc, alignment);
 
 				// check that the returned address has the requested alignment
-				assert((reinterpret_cast<uintptr_t>(pPtr) & (alignment - 1)) == 0);
+				Assert::IsTrue((reinterpret_cast<uintptr_t>(pPtr) & (alignment - 1)) == 0);
 #else
 				void* pPtr = alloc(pHeapManager, sizeAlloc);
 #endif // SUPPORT_ALIGNMENT
@@ -155,10 +153,10 @@ namespace HeapManagerUnitTest
 					AllocatedAddresses.pop_back();
 
 					bool success = Contains(pHeapManager, pPtr) && IsAllocated(pHeapManager, pPtr);
-					assert(success);
+					Assert::IsTrue(success);
 
 					success = free(pHeapManager, pPtr);
-					assert(success);
+					Assert::IsTrue(success);
 
 					numFrees++;
 				}
@@ -196,10 +194,10 @@ namespace HeapManagerUnitTest
 					AllocatedAddresses.pop_back();
 
 					bool success = Contains(pHeapManager, pPtr) && IsAllocated(pHeapManager, pPtr);
-					assert(success);
+					Assert::IsTrue(success);
 
 					success = free(pHeapManager, pPtr);
-					assert(success);
+					Assert::IsTrue(success);
 				}
 
 #if defined(SUPPORTS_SHOWFREEBLOCKS) || defined(SUPPORTS_SHOWOUTSTANDINGALLOCATIONS)
@@ -232,15 +230,15 @@ namespace HeapManagerUnitTest
 
 				// do a large test allocation to see if garbage collection worked
 				void* pPtr = alloc(pHeapManager, sizeHeap / 2);
-				assert(pPtr);
+				Assert::IsTrue(pPtr);
 
 				if (pPtr)
 				{
 					bool success = Contains(pHeapManager, pPtr) && IsAllocated(pHeapManager, pPtr);
-					assert(success);
+					Assert::IsTrue(success);
 
 					success = free(pHeapManager, pPtr);
-					assert(success);
+					Assert::IsTrue(success);
 
 				}
 			}

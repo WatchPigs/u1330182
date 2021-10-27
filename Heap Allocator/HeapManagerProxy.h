@@ -18,17 +18,21 @@ namespace HeapManagerProxy
 
 	HeapManager * CreateHeapManager(void* pHeapMemory, size_t sizeHeap, unsigned int numDescriptors);
 
-	void* alloc(HeapManager* pHeapManager, size_t sizeAlloc, const unsigned int alignment);
+	void* alloc(HeapManager* pHeapManager, size_t sizeAlloc, const unsigned int alignment = 4);
 
 	bool free(HeapManager* pHeapManager, void* pPtr);
+
+	void Collect(HeapManager* pHeapManager);
 
 	void ShowFreeBlocks(HeapManager* pHeapManager);
 
 	void ShowOutstandingAllocations(HeapManager* pHeapManager);
 
-	bool Contains();
+	bool Contains(HeapManager* pHeapManager, void* pPtr);
 
-	bool IsAllocated();
+	bool IsAllocated(HeapManager* pHeapManager, void* pPtr);
+
+	void Destroy(HeapManager* pHeapManager);
 }
 
 
