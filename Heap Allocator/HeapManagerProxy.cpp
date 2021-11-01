@@ -35,13 +35,13 @@ inline size_t AlignUp(size_t i_value, size_t i_align)
 HeapManager* HeapManagerProxy::CreateHeapManager(void* pHeapMemory, size_t sizeHeap, unsigned int numDescriptors)
 {
 	//initialize HeapManager
-	HeapManager* pHeapManager = (HeapManager*)pHeapMemory;
-	pHeapManager->pFreeList = (MemoryBlock*)(pHeapManager + 1);
+	HeapManager* pHeapManager = static_cast<HeapManager*>(pHeapMemory);
+	pHeapManager->pFreeList = reinterpret_cast<MemoryBlock*>(pHeapManager + 1);
 	pHeapManager->pOutstandingAllocations = nullptr;
 	pHeapManager->sizeHeap = sizeHeap - sizeof(HeapManager);
 
 	//initialize pFreeList with the first free block
-	pHeapManager->pFreeList->pBaseAddress = (void*)(pHeapManager->pFreeList + 1);
+	pHeapManager->pFreeList->pBaseAddress = static_cast<void*>(pHeapManager->pFreeList + 1);
 	pHeapManager->pFreeList->BlockSize = pHeapManager->sizeHeap - sizeof(MemoryBlock);
 	pHeapManager->pFreeList->pNextBlock = nullptr;
 
@@ -58,14 +58,14 @@ void* HeapManagerProxy::alloc(HeapManager* pHeapManager, size_t sizeAlloc, const
 
 	while (true)
 	{
-		void* tailAddress = (void*)((char*)pBlockIter->pBaseAddress + pBlockIter->BlockSize);
-		void* requiredMemoryBlockBeginAddress = (void*)(AlignDown((size_t)tailAddress - sizeAlloc, i_align) - sizeof(MemoryBlock));
+		void* tailAddress = static_cast<void*>(static_cast<char*>(pBlockIter->pBaseAddress) + pBlockIter->BlockSize);
+		void* requiredMemoryBlockBeginAddress = reinterpret_cast<void*>(AlignDown(reinterpret_cast<size_t>(tailAddress) - sizeAlloc, i_align) - sizeof(MemoryBlock));
 		if (pBlockIter->BlockSize > sizeAlloc && requiredMemoryBlockBeginAddress > pBlockIter->pBaseAddress)
 		{
 			//create new allocated block
-			MemoryBlock* pNewBlock = (MemoryBlock*)requiredMemoryBlockBeginAddress;
-			pNewBlock->BlockSize = (size_t)tailAddress - (size_t)requiredMemoryBlockBeginAddress - sizeof(MemoryBlock);
-			pNewBlock->pBaseAddress = (void*)(pNewBlock + 1);
+			MemoryBlock* pNewBlock = static_cast<MemoryBlock*>(requiredMemoryBlockBeginAddress);
+			pNewBlock->BlockSize = reinterpret_cast<size_t>(tailAddress) - reinterpret_cast<size_t>(requiredMemoryBlockBeginAddress) - sizeof(MemoryBlock);
+			pNewBlock->pBaseAddress = static_cast<void*>(pNewBlock + 1);
 			pNewBlock->pNextBlock = nullptr;
 
 			//add new allocated block into the pOutstandingAllocations list
@@ -86,7 +86,7 @@ void* HeapManagerProxy::alloc(HeapManager* pHeapManager, size_t sizeAlloc, const
 			}
 
 			//shrink the block size of the free block
-			pBlockIter->BlockSize -= (size_t)tailAddress - (size_t)requiredMemoryBlockBeginAddress;
+			pBlockIter->BlockSize -= reinterpret_cast<size_t>(tailAddress) - reinterpret_cast<size_t>(requiredMemoryBlockBeginAddress);
 
 			return pNewBlock->pBaseAddress;
 		}
@@ -153,7 +153,7 @@ void HeapManagerProxy::Collect(HeapManager* pHeapManager)
 
 	while (pFreeListBlockIter != nullptr && pFreeListBlockIter->pNextBlock != nullptr)
 	{
-		if (((size_t)pFreeListBlockIter->pNextBlock->pBaseAddress + pFreeListBlockIter->pNextBlock->BlockSize) == (size_t)pFreeListBlockIter)
+		if ((reinterpret_cast<size_t>(pFreeListBlockIter->pNextBlock->pBaseAddress) + pFreeListBlockIter->pNextBlock->BlockSize) == reinterpret_cast<size_t>(pFreeListBlockIter))
 		{
 			pFreeListBlockIter->pNextBlock->BlockSize += (pFreeListBlockIter->BlockSize + sizeof(MemoryBlock));
 			if (pLastFreeListBlockIter != nullptr) pLastFreeListBlockIter->pNextBlock = pFreeListBlockIter->pNextBlock;
@@ -173,7 +173,7 @@ void HeapManagerProxy::ShowFreeBlocks(HeapManager* pHeapManager)
 	MemoryBlock* pFreeListBlockIter = pHeapManager->pFreeList;
 	while (pFreeListBlockIter != nullptr)
 	{
-		printf("%llu\t%llu\t\n", (size_t)pFreeListBlockIter->pBaseAddress, pFreeListBlockIter->BlockSize);
+		printf("%llu\t%llu\t\n", reinterpret_cast<size_t>(pFreeListBlockIter->pBaseAddress), pFreeListBlockIter->BlockSize);
 		pFreeListBlockIter = pFreeListBlockIter->pNextBlock;
 	}
 
@@ -187,7 +187,7 @@ void HeapManagerProxy::ShowOutstandingAllocations(HeapManager* pHeapManager)
 	MemoryBlock* pOutstandingAllocationsBlockIter = pHeapManager->pOutstandingAllocations;
 	while (pOutstandingAllocationsBlockIter != nullptr)
 	{
-		printf("%llu\t%llu\t\n", (size_t)pOutstandingAllocationsBlockIter->pBaseAddress, pOutstandingAllocationsBlockIter->BlockSize);
+		printf("%llu\t%llu\t\n", reinterpret_cast<size_t>(pOutstandingAllocationsBlockIter->pBaseAddress), pOutstandingAllocationsBlockIter->BlockSize);
 		pOutstandingAllocationsBlockIter = pOutstandingAllocationsBlockIter->pNextBlock;
 	}
 }
