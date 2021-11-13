@@ -9,6 +9,10 @@ public:
 		m_Position(i_InitialPosition),
 		m_Health(i_InitialHealth)
 	{ }
+	GameActor(const GameActor& obj) :
+		m_Position(obj.m_Position),
+		m_Health(obj.m_Health)
+	{ }
 
 	virtual ~GameActor() {}
 

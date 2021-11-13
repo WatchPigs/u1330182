@@ -14,6 +14,10 @@ public:
 		GameActor(i_InitialPosition, i_InitialHealth),
 		m_Name(_strdup(i_pName ? i_pName : "Unknown"))
 	{ }
+	Human(const Human &obj) : 
+		GameActor(obj),
+		m_Name(_strdup(obj.m_Name))
+	{ }
 	~Human()
 	{
 		if (m_Name)
