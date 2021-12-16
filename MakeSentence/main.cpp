@@ -9,9 +9,24 @@
 #include <stdio.h>
 #include "MakeSentence.h"
 
-// This is only a simple unit test. 
+void UnitTest();
 
 int main(int i_argc, char** i_argl)
+{
+	char query[] = "Enter a word for the sentence, empty to end: ";
+	char* pSentence = MakeSentenceByInput(query);
+
+	printf("The Sentence is: %s\n", pSentence);
+
+	free(pSentence);
+
+	//UnitTest();
+
+	return 0;
+}
+
+// This is only a simple unit test. 
+void UnitTest()
 {
 	const char* strings[] = {
 		"This",
@@ -23,13 +38,11 @@ int main(int i_argc, char** i_argl)
 
 	char* pSentence = MakeSentence(strings);
 
-	printf("The Sentence is: %s", pSentence);
+	printf("(unit test)The Sentence is: %s", pSentence);
 
 	free(pSentence);
 
 #if defined(_DEBUG)
 	_CrtDumpMemoryLeaks();
 #endif // _DEBUG
-
-	return 0;
 }
