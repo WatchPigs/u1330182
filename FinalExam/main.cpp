@@ -41,6 +41,7 @@ int main(int i_arg, char**)
 	_CrtDumpMemoryLeaks();
 #endif // _DEBUG
 
+	printf("end\n");
 	return 0;
 }
 
