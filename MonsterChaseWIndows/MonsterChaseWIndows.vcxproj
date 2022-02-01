@@ -95,9 +95,9 @@
       <AdditionalIncludeDirectories>$(SolutionDir)GLib;$(SolutionDir)Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;GLib_$(PlatformTarget)-$(Configuration).lib;$(SolutionDir)$(Platform)\$(Configuration)\Engine.lib;$(SolutionDir)$(Platform)\$(Configuration)\GLib.lib</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\Engine.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\GLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Exports\GLib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -112,11 +112,11 @@
       <AdditionalIncludeDirectories>$(SolutionDir)GLib;$(SolutionDir)Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;GLib_$(PlatformTarget)-$(Configuration).lib;$(SolutionDir)$(Platform)\$(Configuration)\Engine.lib;$(SolutionDir)$(Platform)\$(Configuration)\GLib.lib</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\Engine.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\GLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Exports\GLib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -131,7 +131,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;$(SolutionDir)$(Platform)\$(Configuration)\Engine.lib;$(SolutionDir)$(Platform)\$(Configuration)\GLib.lib</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\Engine.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\GLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
     </Link>
@@ -147,11 +147,11 @@
       <AdditionalIncludeDirectories>$(SolutionDir)GLib;$(SolutionDir)Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>d3d11.lib;GLib_$(PlatformTarget)-$(Configuration).lib;$(SolutionDir)$(Platform)\$(Configuration)\Engine.lib;$(SolutionDir)$(Platform)\$(Configuration)\GLib.lib</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\Engine.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\GLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Exports\GLib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

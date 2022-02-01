@@ -13,7 +13,13 @@
 #include "GLib.h"
 #include "AssetManager.h"
 
-int WINAPI wWinMain(HINSTANCE i_hInstance, HINSTANCE i_hPrevInstance, LPWSTR i_lpCmdLine, int i_nCmdShow)
+int
+#if defined(_M_CEE_PURE)
+__clrcall
+#else
+WINAPI
+#endif
+wWinMain(_In_ HINSTANCE i_hInstance, _In_opt_ HINSTANCE i_hPrevInstance, _In_ LPWSTR i_lpCmdLine, _In_ int i_nCmdShow)
 {
 	// IMPORTANT: first we need to initialize GLib
 	bool bSuccess = GLib::Initialize(i_hInstance, i_nCmdShow, "GLibTest", -1, 800, 600, true);
@@ -70,9 +76,9 @@ int WINAPI wWinMain(HINSTANCE i_hInstance, HINSTANCE i_hPrevInstance, LPWSTR i_l
 
 					static GLib::Point2D	Offset = { -180.0f, -100.0f };
 
-					if (keyStates[W]) Offset.y -= moveDist;
+					if (keyStates[W]) Offset.y += moveDist;
 					if (keyStates[A]) Offset.x -= moveDist;
-					if (keyStates[S]) Offset.y += moveDist;
+					if (keyStates[S]) Offset.y -= moveDist;
 					if (keyStates[D]) Offset.x += moveDist;
 
 					GLib::Render(*AssetManager::get_instance().FindSprite("player"), Offset, 0.0f, 0.0f);
