@@ -7,7 +7,7 @@ class AssetManager
 {
 public:
 	static AssetManager& get_instance();
-	void AddSprite(std::string name, GLib::Sprite* pSprite);
+	void AddSprite(std::string name, const char* i_pFilename);
 	GLib::Sprite* FindSprite(std::string name);
 	bool DeleteSprite(std::string name);
 
@@ -22,3 +22,6 @@ private:
 	std::map<std::string, GLib::Sprite*> m_sprites;
 };
 
+GLib::Sprite* CreateSprite(const char* i_pFilename);
+
+void* LoadFile(const char* i_pFilename, size_t& o_sizeFile);
