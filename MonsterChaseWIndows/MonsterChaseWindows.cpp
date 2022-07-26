@@ -26,14 +26,15 @@ wWinMain(_In_ HINSTANCE i_hInstance, _In_opt_ HINSTANCE i_hPrevInstance, _In_ LP
 
 	if (bSuccess)
 	{
-		AssetManager::get_instance().AddSprite("player", "data\\GoodGuy.dds");
+		AssetManager::get_instance().AddSprite("GoodGuy", "data\\GoodGuy.dds");
+		AssetManager::get_instance().AddSprite("BadGuy", "data\\BadGuy.dds");
 
 		bool bQuit = false;
 
-		//enum KeyCode { W = 87, A = 65, S = 83, D = 68, Q = 81 };
-		enum KeyCode { W, A, S, D, Q };
+		//W = 87, A = 65, S = 83, D = 68, I = 73, J = 74, K = 75, L = 76, Q = 81
+		enum KeyCode { W, A, S, D, I, J, K, L, Q };
 
-		bool keyStates[4] = { 0 };
+		bool keyStates[8] = { 0 };
 
 		GLib::SetKeyStateChangeCallback([&keyStates, &bQuit](unsigned int i_VKeyID, bool bWentDown) -> void {
 #ifdef _DEBUG
@@ -57,6 +58,18 @@ wWinMain(_In_ HINSTANCE i_hInstance, _In_opt_ HINSTANCE i_hPrevInstance, _In_ LP
 			case 68:
 				keyStates[D] = bWentDown;
 				break;
+			case 73:
+				keyStates[I] = bWentDown;
+				break;
+			case 74:
+				keyStates[J] = bWentDown;
+				break;
+			case 75:
+				keyStates[K] = bWentDown;
+				break;
+			case 76:
+				keyStates[L] = bWentDown;
+				break;
 			case 81:
 				bQuit = bWentDown;
 			}
@@ -70,7 +83,7 @@ wWinMain(_In_ HINSTANCE i_hInstance, _In_opt_ HINSTANCE i_hPrevInstance, _In_ LP
 				GLib::BeginRendering(DirectX::Colors::Blue);
 				GLib::Sprites::BeginRendering();
 
-				if (AssetManager::get_instance().FindSprite("player"))
+				if (AssetManager::get_instance().FindSprite("GoodGuy"))
 				{
 					static float			moveDist = .01f;
 
@@ -81,8 +94,22 @@ wWinMain(_In_ HINSTANCE i_hInstance, _In_opt_ HINSTANCE i_hPrevInstance, _In_ LP
 					if (keyStates[S]) Offset.y -= moveDist;
 					if (keyStates[D]) Offset.x += moveDist;
 
-					GLib::Render(*AssetManager::get_instance().FindSprite("player"), Offset, 0.0f, 0.0f);
+					GLib::Render(*AssetManager::get_instance().FindSprite("GoodGuy"), Offset, 0.0f, 0.0f);
 				}
+				if (AssetManager::get_instance().FindSprite("BadGuy"))
+				{
+					static float			moveDist = .01f;
+
+					static GLib::Point2D	Offset = { 180.0f, -100.0f };
+
+					if (keyStates[I]) Offset.y += moveDist;
+					if (keyStates[J]) Offset.x -= moveDist;
+					if (keyStates[K]) Offset.y -= moveDist;
+					if (keyStates[L]) Offset.x += moveDist;
+
+					GLib::Render(*AssetManager::get_instance().FindSprite("BadGuy"), Offset, 0.0f, 0.0f);
+				}
+
 				GLib::Sprites::EndRendering();
 				GLib::EndRendering();
 			}
