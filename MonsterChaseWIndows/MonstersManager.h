@@ -17,7 +17,7 @@ public:
 	void Remove(MonsterNode* mn);
 	int SamePositionAmount();
 	void MonstersAct();
-	bool Encountered(Point2D p);
+	bool Encountered(Engine::Point2D p);
 	void Print();
 };
 

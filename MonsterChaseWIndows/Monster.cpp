@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace std;
 
-Monster::Monster(char name[], int x, int y, int lifetime) : GameObject(x, y, 0, RANGE, 0, RANGE)
+Monster::Monster(char name[], int x, int y, int lifetime) : Engine::GameObject(x, y, 0, RANGE, 0, RANGE)
 {
 	m_name = new char[strlen(name) + 1];
 	for (int i = 0; i <= (int)strlen(name); i++)
@@ -34,16 +34,16 @@ void Monster::Act()
 	switch (direction)
 	{
 	case 0:
-		__move(1, 0);
+		Engine::GameObject::__move(1, 0);
 		break;
 	case 1:
-		__move(0, 1);
+		Engine::GameObject::__move(0, 1);
 		break;
 	case 2:
-		__move(-1, 0);
+		Engine::GameObject::__move(-1, 0);
 		break;
 	default:
-		__move(0, -1);
+		Engine::GameObject::__move(0, -1);
 	}
 }
 

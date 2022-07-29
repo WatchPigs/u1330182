@@ -26,8 +26,8 @@ wWinMain(_In_ HINSTANCE i_hInstance, _In_opt_ HINSTANCE i_hPrevInstance, _In_ LP
 
 	if (bSuccess)
 	{
-		AssetManager::get_instance().AddSprite("GoodGuy", "data\\GoodGuy.dds");
-		AssetManager::get_instance().AddSprite("BadGuy", "data\\BadGuy.dds");
+		Engine::AssetManager::get_instance().AddSprite("GoodGuy", "data\\GoodGuy.dds");
+		Engine::AssetManager::get_instance().AddSprite("BadGuy", "data\\BadGuy.dds");
 
 		bool bQuit = false;
 
@@ -83,7 +83,7 @@ wWinMain(_In_ HINSTANCE i_hInstance, _In_opt_ HINSTANCE i_hPrevInstance, _In_ LP
 				GLib::BeginRendering(DirectX::Colors::Blue);
 				GLib::Sprites::BeginRendering();
 
-				if (AssetManager::get_instance().FindSprite("GoodGuy"))
+				if (Engine::AssetManager::get_instance().FindSprite("GoodGuy"))
 				{
 					static float			moveDist = .01f;
 
@@ -94,9 +94,9 @@ wWinMain(_In_ HINSTANCE i_hInstance, _In_opt_ HINSTANCE i_hPrevInstance, _In_ LP
 					if (keyStates[S]) Offset.y -= moveDist;
 					if (keyStates[D]) Offset.x += moveDist;
 
-					GLib::Render(*AssetManager::get_instance().FindSprite("GoodGuy"), Offset, 0.0f, 0.0f);
+					GLib::Render(*Engine::AssetManager::get_instance().FindSprite("GoodGuy"), Offset, 0.0f, 0.0f);
 				}
-				if (AssetManager::get_instance().FindSprite("BadGuy"))
+				if (Engine::AssetManager::get_instance().FindSprite("BadGuy"))
 				{
 					static float			moveDist = .01f;
 
@@ -107,7 +107,7 @@ wWinMain(_In_ HINSTANCE i_hInstance, _In_opt_ HINSTANCE i_hPrevInstance, _In_ LP
 					if (keyStates[K]) Offset.y -= moveDist;
 					if (keyStates[L]) Offset.x += moveDist;
 
-					GLib::Render(*AssetManager::get_instance().FindSprite("BadGuy"), Offset, 0.0f, 0.0f);
+					GLib::Render(*Engine::AssetManager::get_instance().FindSprite("BadGuy"), Offset, 0.0f, 0.0f);
 				}
 
 				GLib::Sprites::EndRendering();
@@ -115,7 +115,7 @@ wWinMain(_In_ HINSTANCE i_hInstance, _In_opt_ HINSTANCE i_hPrevInstance, _In_ LP
 			}
 		} while (bQuit == false);
 
-		if (AssetManager::get_instance().FindSprite("player")) AssetManager::get_instance().DeleteSprite("player");
+		if (Engine::AssetManager::get_instance().FindSprite("player")) Engine::AssetManager::get_instance().DeleteSprite("player");
 		GLib::Shutdown();
 	}
 

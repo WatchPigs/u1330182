@@ -88,7 +88,7 @@ int MonstersManager::SamePositionAmount()
 		MonsterNode* it2 = it1->next;
 		while (it2)
 		{
-			if (it2->self->GetPoint() == it1->self->GetPoint()) amount++;
+			if (it2->self->Engine::GameObject::GetPoint() == it1->self->Engine::GameObject::GetPoint()) amount++;
 			it2 = it2->next;
 		}
 		it1 = it1->next;
@@ -125,7 +125,7 @@ void MonstersManager::MonstersAct()
 	}
 }
 
-bool MonstersManager::Encountered(Point2D p)
+bool MonstersManager::Encountered(Engine::Point2D p)
 {
 	if (m_entry)
 	{

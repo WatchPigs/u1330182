@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
-class Player : public GameObject
+class Player : public Engine::GameObject
 {
 private:
 	char* m_name;

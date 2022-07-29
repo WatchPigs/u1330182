@@ -1,114 +1,117 @@
 #include "AssetManager.h"
 #include <assert.h>
 
-AssetManager& AssetManager::get_instance()
+namespace Engine
 {
-	static AssetManager instance;
-	return instance;
-}
-
-void AssetManager::AddSprite(std::string name, const char* i_pFilename)
-{
-	m_sprites[name] = CreateSprite(i_pFilename);
-}
-
-GLib::Sprite* AssetManager::FindSprite(std::string name)
-{
-	std::map<std::string, GLib::Sprite*>::iterator iter = m_sprites.find(name);
-
-	if (iter != m_sprites.end())
+	AssetManager& AssetManager::get_instance()
 	{
-		return iter->second;
+		static AssetManager instance;
+		return instance;
 	}
-	else return nullptr;
-}
 
-bool AssetManager::DeleteSprite(std::string name)
-{
-	std::map<std::string, GLib::Sprite*>::iterator iter = m_sprites.find(name);
-
-	if (iter != m_sprites.end())
+	void AssetManager::AddSprite(std::string name, const char* i_pFilename)
 	{
-		GLib::Release(iter->second);
-		m_sprites.erase(iter);
-		return true;
+		m_sprites[name] = CreateSprite(i_pFilename);
 	}
-	else return false;
-}
 
-GLib::Sprite* CreateSprite(const char* i_pFilename)
-{
-	assert(i_pFilename);
+	GLib::Sprite* AssetManager::FindSprite(std::string name)
+	{
+		std::map<std::string, GLib::Sprite*>::iterator iter = m_sprites.find(name);
 
-	size_t sizeTextureFile = 0;
+		if (iter != m_sprites.end())
+		{
+			return iter->second;
+		}
+		else return nullptr;
+	}
 
-	// Load the source file (texture data)
-	void* pTextureFile = LoadFile(i_pFilename, sizeTextureFile);
+	bool AssetManager::DeleteSprite(std::string name)
+	{
+		std::map<std::string, GLib::Sprite*>::iterator iter = m_sprites.find(name);
 
-	// Ask GLib to create a texture out of the data (assuming it was loaded successfully)
-	GLib::Texture* pTexture = pTextureFile ? GLib::CreateTexture(pTextureFile, sizeTextureFile) : nullptr;
+		if (iter != m_sprites.end())
+		{
+			GLib::Release(iter->second);
+			m_sprites.erase(iter);
+			return true;
+		}
+		else return false;
+	}
 
-	// exit if something didn't work
-	// probably need some debug logging in here!!!!
-	if (pTextureFile)
-		delete[] pTextureFile;
+	GLib::Sprite* CreateSprite(const char* i_pFilename)
+	{
+		assert(i_pFilename);
 
-	if (pTexture == nullptr)
-		return nullptr;
+		size_t sizeTextureFile = 0;
 
-	unsigned int width = 0;
-	unsigned int height = 0;
-	unsigned int depth = 0;
+		// Load the source file (texture data)
+		void* pTextureFile = LoadFile(i_pFilename, sizeTextureFile);
 
-	// Get the dimensions of the texture. We'll use this to determine how big it is on screen
-	bool result = GLib::GetDimensions(*pTexture, width, height, depth);
-	assert(result == true);
-	assert((width > 0) && (height > 0));
+		// Ask GLib to create a texture out of the data (assuming it was loaded successfully)
+		GLib::Texture* pTexture = pTextureFile ? GLib::CreateTexture(pTextureFile, sizeTextureFile) : nullptr;
 
-	// Define the sprite edges
-	GLib::SpriteEdges	Edges = { -float(width / 2.0f), float(height), float(width / 2.0f), 0.0f };
-	GLib::SpriteUVs	UVs = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 0.0f, 1.0f }, { 1.0f, 1.0f } };
-	GLib::RGBA							Color = { 255, 255, 255, 255 };
+		// exit if something didn't work
+		// probably need some debug logging in here!!!!
+		if (pTextureFile)
+			delete[] pTextureFile;
 
-	// Create the sprite
-	GLib::Sprite* pSprite = GLib::CreateSprite(Edges, 0.1f, Color, UVs, pTexture);
+		if (pTexture == nullptr)
+			return nullptr;
 
-	// release our reference on the Texture
-	GLib::Release(pTexture);
+		unsigned int width = 0;
+		unsigned int height = 0;
+		unsigned int depth = 0;
 
-	return pSprite;
-}
+		// Get the dimensions of the texture. We'll use this to determine how big it is on screen
+		bool result = GLib::GetDimensions(*pTexture, width, height, depth);
+		assert(result == true);
+		assert((width > 0) && (height > 0));
 
-void* LoadFile(const char* i_pFilename, size_t& o_sizeFile)
-{
-	assert(i_pFilename != NULL);
+		// Define the sprite edges
+		GLib::SpriteEdges	Edges = { -float(width / 2.0f), float(height), float(width / 2.0f), 0.0f };
+		GLib::SpriteUVs	UVs = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 0.0f, 1.0f }, { 1.0f, 1.0f } };
+		GLib::RGBA							Color = { 255, 255, 255, 255 };
 
-	FILE* pFile = NULL;
+		// Create the sprite
+		GLib::Sprite* pSprite = GLib::CreateSprite(Edges, 0.1f, Color, UVs, pTexture);
 
-	errno_t fopenError = fopen_s(&pFile, i_pFilename, "rb");
-	if (fopenError != 0)
-		return NULL;
+		// release our reference on the Texture
+		GLib::Release(pTexture);
 
-	assert(pFile != NULL);
+		return pSprite;
+	}
 
-	int FileIOError = fseek(pFile, 0, SEEK_END);
-	assert(FileIOError == 0);
+	void* LoadFile(const char* i_pFilename, size_t& o_sizeFile)
+	{
+		assert(i_pFilename != NULL);
 
-	long FileSize = ftell(pFile);
-	assert(FileSize >= 0);
+		FILE* pFile = NULL;
 
-	FileIOError = fseek(pFile, 0, SEEK_SET);
-	assert(FileIOError == 0);
+		errno_t fopenError = fopen_s(&pFile, i_pFilename, "rb");
+		if (fopenError != 0)
+			return NULL;
 
-	uint8_t* pBuffer = new uint8_t[FileSize];
-	assert(pBuffer);
+		assert(pFile != NULL);
 
-	size_t FileRead = fread(pBuffer, 1, FileSize, pFile);
-	assert(FileRead == FileSize);
+		int FileIOError = fseek(pFile, 0, SEEK_END);
+		assert(FileIOError == 0);
 
-	fclose(pFile);
+		long FileSize = ftell(pFile);
+		assert(FileSize >= 0);
 
-	o_sizeFile = FileSize;
+		FileIOError = fseek(pFile, 0, SEEK_SET);
+		assert(FileIOError == 0);
 
-	return pBuffer;
+		uint8_t* pBuffer = new uint8_t[FileSize];
+		assert(pBuffer);
+
+		size_t FileRead = fread(pBuffer, 1, FileSize, pFile);
+		assert(FileRead == FileSize);
+
+		fclose(pFile);
+
+		o_sizeFile = FileSize;
+
+		return pBuffer;
+	}
 }

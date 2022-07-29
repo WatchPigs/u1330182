@@ -2,7 +2,7 @@
 #include "GameObject.h"
 
 
-class Monster : public GameObject
+class Monster : public Engine::GameObject
 {
 private:
 	int m_lifetime;
