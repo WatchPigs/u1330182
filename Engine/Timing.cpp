@@ -12,7 +12,7 @@ namespace Engine
 
 		LARGE_INTEGER PerformanceFrequency = { 0 };
 
-		bool Initialize()
+		bool Init()
 		{
 			if (!QueryPerformanceFrequency(&PerformanceFrequency))
 				return false;
@@ -20,7 +20,7 @@ namespace Engine
 			return true;
 		}
 
-		tick GetCurrentTickCounter()
+		tick_t GetCurrentTickCounter()
 		{
 			LARGE_INTEGER CurrentFrameCounter;
 
@@ -30,28 +30,28 @@ namespace Engine
 			return CurrentFrameCounter.QuadPart;
 		}
 
-		double GetTimeDiffInMilliseconds(tick i_StartTick, tick i_EndTick)
+		float GetTimeDiff_ms(tick_t i_StartTick, tick_t i_EndTick)
 		{
 			assert(PerformanceFrequency.QuadPart != 0);
 
-			return (1000.0 * double(i_EndTick - i_StartTick)) / PerformanceFrequency.QuadPart;
+			return (1000.0 * static_cast<float>(i_EndTick - i_StartTick)) / PerformanceFrequency.QuadPart;
 		}
 
-		double ConvertTicksToMilliseconds(tick i_TickCount)
+		float CvtTicksToMilliseconds(tick_t i_TickCount)
 		{
 			assert(PerformanceFrequency.QuadPart != 0);
 
-			return (1000.0 * double(i_TickCount)) / PerformanceFrequency.QuadPart;
+			return (1000.0 * static_cast<float>(i_TickCount)) / PerformanceFrequency.QuadPart;
 		}
 
-		inline double ConvertSecondsToMilliseconds(double i_Seconds)
+		inline float CvtSecondsToMilliseconds(float i_Seconds)
 		{
-			return i_Seconds * 1000.0;
+			return i_Seconds * 1000.0f;
 		}
 
-		inline double ConvertPerSecondToMillisecond(double i_PerSecond)
+		inline float CvtPerSecondToPerMillisecond(float i_PerSecond)
 		{
-			return i_PerSecond / 1000.0;
+			return i_PerSecond / 1000.0f;
 		}
 	}
 }

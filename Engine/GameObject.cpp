@@ -2,30 +2,33 @@
 
 namespace Engine
 {
-	GameObject::GameObject(int x, int y, int minX, int maxX, int minY, int maxY) : m_point(__clamp(minX, maxX, x), __clamp(minY, maxY, y))
+	SmartPtr<GameObject> GameObject::Create(const Vector2& i_InitialPosition, const Vector2& i_InitialVelocity = Vector2::Zero)
 	{
-		m_RangeMinX = minX;
-		m_RangeMaxX = maxX;
-		m_RangeMinY = minY;
-		m_RangeMaxY = maxY;
+		return SmartPtr<GameObject>(new GameObject(i_InitialPosition, i_InitialVelocity));
 	}
 
+	GameObject::GameObject(const Vector2& i_InitialPosition, const Vector2& i_InitialVelocity = Vector2::Zero) :
+		m_Position(i_InitialPosition),
+		m_Velocity(i_InitialVelocity)
+	{}
 
-	void GameObject::__move(int x, int y)
+	Vector2 GameObject::GetPosition() const
 	{
-		m_point.SetX(__clamp(m_RangeMinX, m_RangeMaxX, x + m_point.GetX()));
-		m_point.SetY(__clamp(m_RangeMinY, m_RangeMaxY, y + m_point.GetY()));
+		return m_Position;
 	}
 
-	Point2D GameObject::GetPoint()
+	void GameObject::SetPosition(const Vector2& i_Position)
 	{
-		return m_point;
+		m_Position = i_Position;
 	}
 
-	int GameObject::__clamp(int min, int max, int num)
+	Vector2 GameObject::GetVelocity() const
 	{
-		if (num < min) return min;
-		if (num > max) return max;
-		return num;
+		return m_Velocity;
+	}
+
+	void GameObject::SetVelocity(const Vector2& i_Velocity)
+	{
+		m_Velocity = i_Velocity;
 	}
 }

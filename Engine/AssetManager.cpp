@@ -14,31 +14,31 @@ namespace Engine
 		m_sprites[name] = CreateSprite(i_pFilename);
 	}
 
-	GLib::Sprite* AssetManager::FindSprite(std::string name)
+	SpritePtr AssetManager::FindSprite(std::string name)
 	{
-		std::map<std::string, GLib::Sprite*>::iterator iter = m_sprites.find(name);
+		std::map<std::string, SpritePtr>::iterator iter = m_sprites.find(name);
 
 		if (iter != m_sprites.end())
 		{
 			return iter->second;
 		}
-		else return nullptr;
+		else return SpritePtr();
 	}
 
 	bool AssetManager::DeleteSprite(std::string name)
 	{
-		std::map<std::string, GLib::Sprite*>::iterator iter = m_sprites.find(name);
+		std::map<std::string, SpritePtr>::iterator iter = m_sprites.find(name);
 
 		if (iter != m_sprites.end())
 		{
-			GLib::Release(iter->second);
+			//GLib::Release(iter->second);
 			m_sprites.erase(iter);
 			return true;
 		}
 		else return false;
 	}
 
-	GLib::Sprite* CreateSprite(const char* i_pFilename)
+	SpritePtr CreateSprite(const char* i_pFilename)
 	{
 		assert(i_pFilename);
 
@@ -56,7 +56,7 @@ namespace Engine
 			delete[] pTextureFile;
 
 		if (pTexture == nullptr)
-			return nullptr;
+			return SpritePtr();
 
 		unsigned int width = 0;
 		unsigned int height = 0;
@@ -78,7 +78,7 @@ namespace Engine
 		// release our reference on the Texture
 		GLib::Release(pTexture);
 
-		return pSprite;
+		return SpritePtr(pSprite);
 	}
 
 	void* LoadFile(const char* i_pFilename, size_t& o_sizeFile)

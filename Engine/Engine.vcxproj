@@ -154,15 +154,76 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="AtomicOperations.h" />
+    <ClInclude Include="ConsolePrint.h" />
+    <ClInclude Include="Events.h" />
+    <ClInclude Include="File.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Point2D.h" />
+    <ClInclude Include="GameObjectFactory.h" />
+    <ClInclude Include="HashedString.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="JobRunner.h" />
+    <ClInclude Include="JobStatus.h" />
+    <ClInclude Include="JobSystem.h" />
+    <ClInclude Include="json.hpp" />
+    <ClInclude Include="LoadFile.h" />
+    <ClInclude Include="Mutex.h" />
+    <ClInclude Include="Physics.h" />
+    <ClInclude Include="PooledString.h" />
+    <ClInclude Include="ProcessFileJob.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="ScopeLock.h" />
+    <ClInclude Include="Semaphore.h" />
+    <ClInclude Include="SharedJobQueue.h" />
+    <ClInclude Include="SingleWriterMultipleReader.Win.h" />
+    <ClInclude Include="StartupShutdown.h" />
+    <ClInclude Include="StringPool.h" />
+    <ClInclude Include="Target.h" />
+    <ClInclude Include="Test.h" />
+    <ClInclude Include="Threading.h" />
+    <ClInclude Include="Vector2.h" />
+    <ClInclude Include="Pointers.hpp" />
     <ClInclude Include="Timing.h" />
+    <ClInclude Include="WaitableObject.h" />
+    <ClInclude Include="WaitableObject.Win.h" />
+    <ClInclude Include="WindowsHelpers.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="AtomicOperations.cpp" />
+    <ClCompile Include="ConsolePrint.Win.cpp" />
+    <ClCompile Include="Events.Win.cpp" />
+    <ClCompile Include="File.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Point2D.cpp" />
+    <ClCompile Include="GameObjectFactory.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="JobRunner.cpp" />
+    <ClCompile Include="JobSystem.cpp" />
+    <ClCompile Include="LoadFile.cpp" />
+    <ClCompile Include="Mutex.Win.cpp" />
+    <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="ProcessFileJob.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Semaphore.Win.cpp" />
+    <ClCompile Include="SharedJobQueue.cpp" />
+    <ClCompile Include="StartupShutdown.cpp" />
+    <ClCompile Include="StringPool.cpp" />
+    <ClCompile Include="Target.Win.cpp" />
+    <ClCompile Include="Test.cpp" />
+    <ClCompile Include="Threading.cpp" />
+    <ClCompile Include="Threading.Win.cpp" />
+    <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Timing.cpp" />
+    <ClCompile Include="World.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Engine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Engine.aps" />
+    <None Include="HashedString.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

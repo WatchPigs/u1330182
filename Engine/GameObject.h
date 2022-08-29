@@ -1,22 +1,21 @@
 #pragma once
-#include "Point2D.h"
+#include "Vector2.h"
+#include "Pointers.hpp"
 
 namespace Engine
 {
 	class GameObject
 	{
-	protected:
-		Point2D m_point;
-		int m_RangeMinX;
-		int m_RangeMinY;
-		int m_RangeMaxX;
-		int m_RangeMaxY;
-		void __move(int x, int y);
-		int __clamp(int min, int max, int num);
 	public:
-		GameObject(int x, int y, int minX, int maxX, int minY, int maxY);
-		Point2D GetPoint();
+		static SmartPtr<GameObject> Create(const Vector2& i_InitialPosition, const Vector2& i_InitialVelocity = Vector2::Zero);
+		Vector2 GetPosition() const;
+		void SetPosition(const Vector2& i_Position);
+		Vector2 GetVelocity() const;
+		void SetVelocity(const Vector2& i_Velocity);
+	private:
+		GameObject(const Vector2& i_InitialPosition, const Vector2& i_InitialVelocity = Vector2::Zero);
+		Vector2 m_Position;
+		Vector2 m_Velocity;
 	};
-
 }
 

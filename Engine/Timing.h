@@ -5,15 +5,15 @@ namespace Engine
 {
 	namespace Timing
 	{
-		typedef uint64_t	tick;
+		typedef uint64_t	tick_t;
 
-		bool Initialize();
+		bool Init();
 
-		tick GetCurrentTickCounter();
-		double GetTimeDiffInMilliseconds(tick i_StartTick, tick i_EndTick = GetCurrentTickCounter());
-		double ConvertTicksToMilliseconds(tick i_TickCount);
+		tick_t GetCurrentTickCounter();
+		float GetTimeDiff_ms(tick_t i_StartTick, tick_t i_EndTick = GetCurrentTickCounter());
+		float CvtTicksToMilliseconds(tick_t i_TickCount);
 
-		inline double ConvertSecondsToMilliseconds(double i_Seconds);
-		inline double ConverttPerSecondToPerMillisecond(double i_PerSecond);
+		inline float CvtSecondsToMilliseconds(float i_Seconds);
+		inline float CvtPerSecondToPerMillisecond(float i_PerSecond);
 	}
 }
