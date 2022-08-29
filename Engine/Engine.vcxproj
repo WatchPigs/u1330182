@@ -166,7 +166,6 @@
     <ClInclude Include="JobStatus.h" />
     <ClInclude Include="JobSystem.h" />
     <ClInclude Include="json.hpp" />
-    <ClInclude Include="LoadFile.h" />
     <ClInclude Include="Mutex.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="PooledString.h" />
@@ -201,7 +200,6 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="JobRunner.cpp" />
     <ClCompile Include="JobSystem.cpp" />
-    <ClCompile Include="LoadFile.cpp" />
     <ClCompile Include="Mutex.Win.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="ProcessFileJob.cpp" />

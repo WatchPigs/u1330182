@@ -1,10 +1,22 @@
 #include "Physics.h"
-
+#include "Pointers.hpp"
+#include "GameObjectFactory.h"
+#include "StartupShutdown.h"
+#include "Mutex.h"
+#include "json.hpp"
+#include "ScopeLock.h"
+#include "Vector2.h"
 
 namespace Engine
 {
 	namespace Physics
 	{
+		bool bShutdown = false;
+		Mutex NewMoveablesMutex;
+
+		std::vector<MoveablePtr> AllMoveables;
+		std::vector<Moveable> NewMoveables;
+
 		Moveable::Moveable(SmartPtr<GameObject>& i_Object, float i_Mass, float i_Kd) :
 			m_Object(i_Object),
 			m_Forces(Vector2::Zero),
@@ -129,5 +141,6 @@ namespace Engine
 			}
 
 		}
+		Bootstrapper PhysicsBootstrapper(std::bind(Init), std::bind(Shutdown));
 	}
 }

@@ -1,4 +1,10 @@
 #include "GameObjectFactory.h"
+#include "File.h"
+#include "StartupShutdown.h"
+#include "ProcessFileJob.h"
+#include "World.h"
+
+#include <functional>
 
 namespace Engine
 {
@@ -119,4 +125,14 @@ namespace Engine
 	//	ComponentCreators.clear();
 	//	ControllerCreators.clear();
 	//}
+
+	namespace GameObjectFactory
+	{
+		void Shutdown()
+		{
+			ComponentCreators.clear();
+			ControllerCreators.clear();
+		}
+		Bootstrapper GameObjectFactoryBootstrapper(std::function<void()>(), std::bind(Shutdown));
+	}
 }

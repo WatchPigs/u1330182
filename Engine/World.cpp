@@ -1,4 +1,9 @@
 #include "World.h"
+#include "StartupShutdown.h"
+#include "Mutex.h"
+#include "ScopeLock.h"
+
+#include <functional>
 
 namespace Engine
 {
@@ -32,9 +37,13 @@ namespace Engine
 		return false;
 	}
 
-	void World::Shutdown()
+	namespace World
 	{
-		WorldGameObjects.clear();
-		WorldGameObjects.shrink_to_fit();
+		void Shutdown()
+		{
+			WorldGameObjects.clear();
+			WorldGameObjects.shrink_to_fit();
+		}
+		Bootstrapper WorldBootstrapper(std::function<void()>(), std::bind(Shutdown));
 	}
 }

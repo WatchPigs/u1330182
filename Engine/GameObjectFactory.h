@@ -4,21 +4,13 @@
 #include "GameObject.h"
 #include "json.hpp"
 #include "Vector2.h"
-#include "File.h"
-#include "StartupShutdown.h"
 #include "JobStatus.h"
-#include "ProcessFileJob.h"
-#include "World.h"
 
-#include <functional>
 #include <string>
 
 
 namespace Engine
 {
-	class GameObject;
-	class Bootstrapper;
-
 	static std::map<std::string, std::function<void(SmartPtr<GameObject>&, nlohmann::json&)>> ControllerCreators;
 	static std::map<std::string, std::function<void(SmartPtr<GameObject>&, nlohmann::json&)> >  ComponentCreators;
 
@@ -38,12 +30,7 @@ namespace Engine
 
 	namespace GameObjectFactory
 	{
-		static void Shutdown()
-		{
-			ComponentCreators.clear();
-			ControllerCreators.clear();
-		}
-		Bootstrapper GameObjectFactoryBootstrapper(std::function<void()>(), std::bind(Shutdown));
+		static void Shutdown();
 	}
 }
 

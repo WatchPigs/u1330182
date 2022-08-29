@@ -2,12 +2,12 @@
 
 namespace Engine
 {
-	SmartPtr<GameObject> GameObject::Create(const Vector2& i_InitialPosition, const Vector2& i_InitialVelocity = Vector2::Zero)
+	SmartPtr<GameObject> GameObject::Create(const Vector2& i_InitialPosition, const Vector2& i_InitialVelocity)
 	{
 		return SmartPtr<GameObject>(new GameObject(i_InitialPosition, i_InitialVelocity));
 	}
 
-	GameObject::GameObject(const Vector2& i_InitialPosition, const Vector2& i_InitialVelocity = Vector2::Zero) :
+	GameObject::GameObject(const Vector2& i_InitialPosition, const Vector2& i_InitialVelocity) :
 		m_Position(i_InitialPosition),
 		m_Velocity(i_InitialVelocity)
 	{}

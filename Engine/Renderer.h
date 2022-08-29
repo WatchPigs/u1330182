@@ -1,29 +1,21 @@
 #pragma once
 
 #include "GameObject.h"
-#include "Pointers.hpp"
-#include "GLib.h"
 #include "AssetManager.h"
-#include "GameObjectFactory.h"
 #include "json.hpp"
-#include "StartupShutdown.h"
-#include "Mutex.h"
-#include "ScopeLock.h"
-#include "Threading.h"
-#include "JobSystem.h"
-#include "ProcessFileJob.h"
-#include "ConsolePrint.h"
 
 #include <vector>
 #include <DirectXColors.h>
+#include <string>
+#include <functional>
 
 namespace Engine
 {
 	namespace Renderer
 	{
-		DirectX::XMVECTORF32 ClearColor = DirectX::Colors::Black;
+		//DirectX::XMVECTORF32 ClearColor = DirectX::Colors::Black;
 
-		bool bShutdown = false;
+		//bool bShutdown = false;
 
 		class Renderable
 		{
@@ -38,10 +30,10 @@ namespace Engine
 		typedef SmartPtr<Renderable> RenderablePtr;
 		typedef WeakPtr<Renderable> WeakRenderablePtr;
 
-		std::vector<RenderablePtr> AllRenderables;
-		std::vector<RenderablePtr> NewRenderables;
+		//std::vector<RenderablePtr> AllRenderables;
+		//std::vector<RenderablePtr> NewRenderables;
 
-		Mutex NewRenderablesMutex;
+		//Mutex NewRenderablesMutex;
 
 		void SetClearColor(DirectX::XMVECTORF32 i_ClearColor);
 		RenderablePtr AddRenderable(const SmartPtr<GameObject>& i_GameObject, SpritePtr i_pSprite);
@@ -55,7 +47,7 @@ namespace Engine
 		void Init();
 		void Shutdown();
 
-		Bootstrapper RendererBootstrapper(std::bind(Init), std::bind(Shutdown));
+		//Bootstrapper RendererBootstrapper(std::bind(Init), std::bind(Shutdown));
 	}
 }
 

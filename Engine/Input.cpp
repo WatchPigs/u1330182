@@ -22,9 +22,14 @@ namespace Engine
 		);
 	}
 
-	void Input::Shutdown()
+	namespace Input
 	{
-		KeyChangeCallbacks.clear();
-		KeyChangeCallbacks.shrink_to_fit();
+		void Shutdown()
+		{
+			KeyChangeCallbacks.clear();
+			KeyChangeCallbacks.shrink_to_fit();
+		}
+
+		Bootstrapper InputBootstrapper(std::bind(Init), std::bind(Shutdown));
 	}
 }

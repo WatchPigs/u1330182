@@ -3,9 +3,9 @@
 #include <Windows.h>
 #include <map>
 
-#include "Console\ConsolePrint.h"
-#include "Init/StartupShutdown.h"
-#include "Types\HashedString.h"
+#include "ConsolePrint.h"
+#include "StartupShutdown.h"
+#include "HashedString.h"
 
 #include "JobRunner.h"
 #include "SharedJobQueue.h"

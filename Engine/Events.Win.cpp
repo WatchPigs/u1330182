@@ -1,5 +1,5 @@
 #include "Events.h"
-#include "Target/Windows/WindowsHelpers.h"
+#include "WindowsHelpers.h"
 
 #include <assert.h>
 #include <Windows.h>

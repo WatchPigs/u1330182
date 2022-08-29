@@ -4,7 +4,7 @@
 
 #include "JobSystem.h"
 
-#include "Types/HashedString.h"
+#include "HashedString.h"
 
 #include <functional>
 #include <queue>

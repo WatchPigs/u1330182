@@ -68,7 +68,7 @@ namespace Engine
 		return bGLibInitialized;
 	}
 
-	void Run(std::function<void()> i_Update)
+	void Run(std::function<bool()> i_Update)
 	{
 		bool bDone = false;
 
@@ -81,7 +81,8 @@ namespace Engine
 				Physics::Tick(dt);
 				//Collision::Tick(dt);
 
-				i_Update();
+				if (i_Update());
+				else break;
 
 				//Renderer::SetClearColor(Collision::FoundCollisionLastTick() ? DirectX::Colors::Red : DirectX::Colors::Blue);
 				Renderer::SetClearColor(DirectX::Colors::Blue);

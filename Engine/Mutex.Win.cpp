@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <windows.h>
 
-#include "Target/Windows/WindowsHelpers.h"
+#include "WindowsHelpers.h"
 #include "Mutex.h"
 
 namespace Engine

@@ -27,7 +27,7 @@ namespace Engine
 
 	void Startup();
 	bool OpenWindow(HINSTANCE i_hInstance, int i_CmdShow, const char* i_pWindowName, WORD i_IconID, unsigned int i_WindowWidth, unsigned int i_WindowHeight);
-	void Run(std::function<void()> i_Update);
+	void Run(std::function<bool()> i_Update);
 	void Shutdown();
 }
 

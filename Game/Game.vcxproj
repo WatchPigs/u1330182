@@ -131,8 +131,9 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Exports\GLib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>d3d11.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\GLib.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>d3d11.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\Engine.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\GLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

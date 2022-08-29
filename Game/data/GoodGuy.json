@@ -1,6 +1,6 @@
 {
-  "name": "BadGuy",
-  "initial_position": [ 0.0, -1.0, -2.0 ],
+  "name": "GoodGuy",
+  "initial_position": [ 0.0, -1.0 ],
 
   "components": {
     "moveable": {
@@ -8,7 +8,7 @@
       "kd": 0.5
     },
     "renderable": {
-      "sprite_texture": "data/BadGuy.dds"    
+      "sprite_texture": "data/GoodGuy.dds"    
     }
   }
 }

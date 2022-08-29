@@ -1,6 +1,6 @@
 {
   "name": "BadGuy",
-  "initial_position": [ 0.0, -1.0, -2.0 ],
+  "initial_position": [ 0.0, -1.0 ],
 
   "components": {
     "moveable": {

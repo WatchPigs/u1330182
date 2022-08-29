@@ -1,17 +1,14 @@
 #include "Renderer.h"
 #include "Pointers.hpp"
-#include "GameObject.h"
 #include "GLib.h"
-#include "AssetManager.h"
 #include "GameObjectFactory.h"
-#include "json.hpp"
-#include "StartupShutdown.h"
 #include "Mutex.h"
 #include "ScopeLock.h"
 #include "Threading.h"
 #include "JobSystem.h"
 #include "ProcessFileJob.h"
 #include "ConsolePrint.h"
+#include "StartupShutdown.h"
 
 #include <vector>
 #include <DirectXColors.h>
@@ -20,6 +17,14 @@ namespace Engine
 {
 	namespace Renderer
 	{
+		bool bShutdown = false;
+		Mutex NewRenderablesMutex;
+
+		std::vector<RenderablePtr> AllRenderables;
+		std::vector<RenderablePtr> NewRenderables;
+
+		DirectX::XMVECTORF32 ClearColor = DirectX::Colors::Black;
+
 		Renderable::Renderable(const SmartPtr<GameObject>& i_Object, SpritePtr& i_Sprite) :
 			m_Object(i_Object),
 
@@ -194,5 +199,7 @@ namespace Engine
 			AllRenderables.clear();
 			AllRenderables.shrink_to_fit();
 		}
+
+		Bootstrapper RendererBootstrapper(std::bind(Init), std::bind(Shutdown));
 	}
 }

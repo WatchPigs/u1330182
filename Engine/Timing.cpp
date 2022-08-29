@@ -1,7 +1,10 @@
+#include "Timing.h"
+#include "StartupShutdown.h"
+
 #include <windows.h>
 #include <assert.h>
 #include <limits.h>
-#include "Timing.h"
+#include <functional>
 
 
 namespace Engine
@@ -34,14 +37,14 @@ namespace Engine
 		{
 			assert(PerformanceFrequency.QuadPart != 0);
 
-			return (1000.0 * static_cast<float>(i_EndTick - i_StartTick)) / PerformanceFrequency.QuadPart;
+			return (1000.0f * static_cast<float>(i_EndTick - i_StartTick)) / PerformanceFrequency.QuadPart;
 		}
 
 		float CvtTicksToMilliseconds(tick_t i_TickCount)
 		{
 			assert(PerformanceFrequency.QuadPart != 0);
 
-			return (1000.0 * static_cast<float>(i_TickCount)) / PerformanceFrequency.QuadPart;
+			return (1000.0f * static_cast<float>(i_TickCount)) / PerformanceFrequency.QuadPart;
 		}
 
 		inline float CvtSecondsToMilliseconds(float i_Seconds)
@@ -53,5 +56,6 @@ namespace Engine
 		{
 			return i_PerSecond / 1000.0f;
 		}
+		Bootstrapper TimingBootstrapper(std::bind(Init), std::function<void()>());
 	}
 }

@@ -1,13 +1,10 @@
 #pragma once
 
 #include "GameObject.h"
-#include "StartupShutdown.h"
-#include "Pointers.hpp"
-#include "GameObjectFactory.h"
 #include "json.hpp"
-#include "Mutex.h"
-#include "ScopeLock.h"
-#include "Vector2.h"
+
+#include <functional>
+#include <vector>
 
 namespace Engine
 {
@@ -29,12 +26,12 @@ namespace Engine
 		typedef SmartPtr<Moveable> MoveablePtr;
 		typedef WeakPtr<Moveable> WeakMoveablePtr;
 
-		std::vector<MoveablePtr> AllMoveables;
-		std::vector<Moveable> NewMoveables;
+		//std::vector<MoveablePtr> AllMoveables;
+		//std::vector<Moveable> NewMoveables;
 
-		bool bShutdown = false;
+		//bool bShutdown = false;
 
-		Mutex NewMoveablesMutex;
+		//Mutex NewMoveablesMutex;
 
 		WeakMoveablePtr GetMoveableForGameObject(const SmartPtr<GameObject>& i_GameObject);
 		void AddMoveable(SmartPtr<GameObject>& i_GameObject, nlohmann::json& i_JSON);
@@ -46,7 +43,7 @@ namespace Engine
 		void Init();
 		void Shutdown();
 
-		Bootstrapper PhysicsBootstrapper(std::bind(Init), std::bind(Shutdown));
+		//Bootstrapper PhysicsBootstrapper(std::bind(Init), std::bind(Shutdown));
 	}
 }
 

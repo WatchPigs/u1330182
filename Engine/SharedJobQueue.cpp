@@ -3,7 +3,7 @@
 #include <assert.h>
 
 #include "Console\ConsolePrint.h"
-#include "Threading\Syncronization\AtomicOperations.h"
+#include "AtomicOperations.h"
 
 namespace Engine
 {

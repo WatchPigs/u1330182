@@ -8,7 +8,7 @@
 
 namespace Engine
 {
-	std::vector<std::function<void(unsigned int, bool)>> KeyChangeCallbacks;
+	//std::vector<std::function<void(unsigned int, bool)>> KeyChangeCallbacks;
 
 	void RegisterOnKeyChange(std::function<void(unsigned int, bool)> i_OnKeyChange);
 
@@ -18,6 +18,6 @@ namespace Engine
 
 		void Shutdown();
 
-		Bootstrapper InputBootstrapper(std::bind(Init), std::bind(Shutdown));
+		//Bootstrapper InputBootstrapper(std::bind(Init), std::bind(Shutdown));
 	}
 }
