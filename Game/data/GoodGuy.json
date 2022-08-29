@@ -1,0 +1,14 @@
+{
+  "name": "BadGuy",
+  "initial_position": [ 0.0, -1.0, -2.0 ],
+
+  "components": {
+    "moveable": {
+      "mass": 90.0,
+      "kd": 0.5
+    },
+    "renderable": {
+      "sprite_texture": "data/BadGuy.dds"    
+    }
+  }
+}
