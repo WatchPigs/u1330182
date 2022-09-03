@@ -1,0 +1,1 @@
+GAMEPLAY - Escape from the enemy: Use WASD to control the good guy. The bad guy will chase you. If he touches you, the game will be over.

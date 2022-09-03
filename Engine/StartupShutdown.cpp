@@ -1,6 +1,7 @@
 #include "StartupShutdown.h"
 #include "Physics.h"
 #include "Renderer.h"
+#include "Collision.h"
 
 namespace Engine
 {
@@ -41,11 +42,12 @@ namespace Engine
 
 		Timing::tick_t currentFrameStartTick = Timing::GetCurrentTickCounter();
 
-		FrameTime = (lastFrameStartTick == 0) ? (1.0f / 60.0f) : (Timing::GetTimeDiff_ms(currentFrameStartTick, lastFrameStartTick) / 1000.0f);
+		FrameTime = (lastFrameStartTick == 0) ? (1.0f / 60.0f) : (Timing::GetTimeDiff_ms(lastFrameStartTick, currentFrameStartTick) / 1000.0f);
 
 		lastFrameStartTick = currentFrameStartTick;
 
-		return IsDebuggerPresent() ? (1.0f / 60.0f) : FrameTime;
+		//return IsDebuggerPresent() ? (1.0f / 60.0f) : FrameTime;
+		return FrameTime;
 	}
 
 	void Startup()
@@ -79,7 +81,7 @@ namespace Engine
 			{
 				float dt = GetFrameTime();
 				Physics::Tick(dt);
-				//Collision::Tick(dt);
+				Collision::Tick(dt);
 
 				if (i_Update());
 				else break;

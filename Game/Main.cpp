@@ -6,8 +6,13 @@
 #include "JobStatus.h"
 #include "Physics.h"
 #include "Renderer.h"
+#include "Collision.h"
 
 #include <Windows.h>
+
+#include <assert.h>
+#include "Utilities.h"
+#include <string>
 
 int WINAPI wWinMain(_In_ HINSTANCE i_hInstance, _In_opt_ HINSTANCE i_hPrevInstance, _In_ LPWSTR i_lpCmdLine, _In_ int i_nCmdShow)
 {
@@ -63,7 +68,7 @@ int WINAPI wWinMain(_In_ HINSTANCE i_hInstance, _In_opt_ HINSTANCE i_hPrevInstan
 
 		CreateGameObjectAsync("data\\GoodGuy.json", [&GameObject1](SmartPtr<GameObject>& i_TheGameObject)
 			{
-				i_TheGameObject->SetPosition(Engine::Vector2(-200, 0));
+				i_TheGameObject->SetPosition(Engine::Vector2(-200, -82));
 				GameObject1 = i_TheGameObject;
 				DEBUG_PRINT("GameObjectFinished");
 
@@ -72,7 +77,7 @@ int WINAPI wWinMain(_In_ HINSTANCE i_hInstance, _In_opt_ HINSTANCE i_hPrevInstan
 
 		CreateGameObjectAsync("data\\BadGuy.json", [&GameObject2](SmartPtr<GameObject>& i_TheGameObject)
 			{
-				i_TheGameObject->SetPosition(Engine::Vector2(200, 0));
+				i_TheGameObject->SetPosition(Engine::Vector2(200, -118));
 				GameObject2 = i_TheGameObject;
 				DEBUG_PRINT("GameObjectFinished");
 
@@ -91,8 +96,8 @@ int WINAPI wWinMain(_In_ HINSTANCE i_hInstance, _In_opt_ HINSTANCE i_hPrevInstan
 				Physics::WeakMoveablePtr GameObject2MoveablePtr = Physics::GetMoveableForGameObject(GameObject2);
 				Physics::MoveablePtr GameObject2Moveable = GameObject2MoveablePtr.AcquireOwnership();
 
-				Vector2 horizentalForce = Vector2(1.0f, 0.0f);
-				Vector2 verticalForce = Vector2(0.0f, 1.0f);
+				Vector2 horizentalForce = Vector2(100.0f, 0.0f);
+				Vector2 verticalForce = Vector2(0.0f, 100.0f);
 				
 				Physics::ApplyForceToMoveable(GameObject1Moveable, Vector2::Zero);
 
@@ -103,20 +108,34 @@ int WINAPI wWinMain(_In_ HINSTANCE i_hInstance, _In_opt_ HINSTANCE i_hPrevInstan
 
 				Physics::ApplyForceToMoveable(GameObject2Moveable, Vector2::Zero);
 
-				if (keyStates[I]) Physics::ApplyForceToMoveable(GameObject2Moveable, verticalForce);
-				if (keyStates[J]) Physics::ApplyForceToMoveable(GameObject2Moveable, -horizentalForce);
-				if (keyStates[K]) Physics::ApplyForceToMoveable(GameObject2Moveable, -verticalForce);
-				if (keyStates[L]) Physics::ApplyForceToMoveable(GameObject2Moveable, horizentalForce);
+				Vector2 gameObject2ToGameObject1 = (GameObject1->GetPosition() - GameObject2->GetPosition()).Normalized();
+				Vector2 traceForce = 30.0f * gameObject2ToGameObject1;
+
+				Physics::ApplyForceToMoveable(GameObject2Moveable, traceForce);
+
+				Collision::SetCollisionCollidaable(GameObject1, [&GameObject2, &bQuit](WeakPtr<GameObject>& otherObject)
+					{
+						if (otherObject == GameObject2) bQuit = true;
+						DEBUG_PRINT("Collide");
+					}
+				);
 
 				if (bQuit)
 				{
 					Engine::Shutdown();
 					return false;
 				}
+				if (!GameObject2) assert(false);
+
 				return true;
 			}
 		);
 	}
 
 	return 0;
+}
+
+void GameEnd()
+{
+
 }

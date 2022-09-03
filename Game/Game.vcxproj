@@ -147,12 +147,12 @@
       <AdditionalIncludeDirectories>$(SolutionDir)GLib;$(SolutionDir)Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Exports\GLib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>d3d11.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\GLib.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\Engine.lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\GLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
