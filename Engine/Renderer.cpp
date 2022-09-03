@@ -150,7 +150,7 @@ namespace Engine
 					{
 						Vector2 ObjectPosition = Object->GetPosition();
 
-						GLib::Render(*(AllRenderables[i]->m_Sprite), { ObjectPosition.GetX(), ObjectPosition.GetY() });
+						GLib::Render(*(AllRenderables[i]->m_Sprite), { ObjectPosition.x(), ObjectPosition.y() });
 					}
 					++i;
 				}

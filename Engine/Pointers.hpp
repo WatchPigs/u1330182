@@ -197,9 +197,6 @@ namespace Engine {
 			if (pPtr != i_other.pPtr)
 			{
 				ReleaseOwnership();
-
-				// don't actually take over data from an ObserveringPointer that has references an object
-				// that has lost all it's owner and has been deleted so we don't release a pointer to it from operator->() or operator*()
 				pCounters = (i_other.pCounters && (i_other.pCounters->SmartRefs() > 0)) ? i_other.pCounters : nullptr;
 				pPtr = (i_other.pCounters && (i_other.pCounters->SmartRefs() > 0)) ? i_other.pPtr : nullptr;
 
@@ -215,9 +212,6 @@ namespace Engine {
 			if (pPtr != i_other.pPtr)
 			{
 				ReleaseOwnership();
-
-				// don't actually take over data from an ObserveringPointer that has references an object
-				// that has lost all it's owner and has been deleted so we don't release a pointer to it from operator->() or operator*()
 				pCounters = (i_other.pCounters && (i_other.pCounters->SmartRefs() > 0)) ? i_other.pCounters : nullptr;
 				pPtr = (i_other.pCounters && (i_other.pCounters->SmartRefs() > 0)) ? i_other.pPtr : nullptr;
 
@@ -572,7 +566,6 @@ namespace Engine {
 			}
 			else
 			{
-				// originated a SmartPtr to nullptr. Still is
 				assert(pPtr == nullptr);
 			}
 		}
@@ -587,7 +580,6 @@ namespace Engine {
 			}
 			else
 			{
-				// originated a SmartPtr to nullptr. Still is
 				assert(pPtr == nullptr);
 			}
 		}

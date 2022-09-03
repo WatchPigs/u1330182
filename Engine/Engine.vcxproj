@@ -155,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="AtomicOperations.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="ConsolePrint.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="File.h" />
@@ -166,6 +167,8 @@
     <ClInclude Include="JobStatus.h" />
     <ClInclude Include="JobSystem.h" />
     <ClInclude Include="json.hpp" />
+    <ClInclude Include="Matrix3.h" />
+    <ClInclude Include="Matrix4.h" />
     <ClInclude Include="Mutex.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="PooledString.h" />
@@ -181,9 +184,13 @@
     <ClInclude Include="Target.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="Threading.h" />
+    <ClInclude Include="Utilities-inl.h" />
+    <ClInclude Include="Utilities.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Pointers.hpp" />
     <ClInclude Include="Timing.h" />
+    <ClInclude Include="Vector3.h" />
+    <ClInclude Include="Vector4.h" />
     <ClInclude Include="WaitableObject.h" />
     <ClInclude Include="WaitableObject.Win.h" />
     <ClInclude Include="WindowsHelpers.h" />
@@ -192,6 +199,7 @@
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="AtomicOperations.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="ConsolePrint.Win.cpp" />
     <ClCompile Include="Events.Win.cpp" />
     <ClCompile Include="File.cpp" />
@@ -200,6 +208,9 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="JobRunner.cpp" />
     <ClCompile Include="JobSystem.cpp" />
+    <ClCompile Include="Matrix3.cpp" />
+    <ClCompile Include="Matrix4.cpp" />
+    <ClCompile Include="Matrix4.SEE.cpp" />
     <ClCompile Include="Mutex.Win.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="ProcessFileJob.cpp" />
@@ -214,6 +225,8 @@
     <ClCompile Include="Threading.Win.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Timing.cpp" />
+    <ClCompile Include="Vector3.cpp" />
+    <ClCompile Include="Vector4.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -222,6 +235,12 @@
   <ItemGroup>
     <None Include="Engine.aps" />
     <None Include="HashedString.inl" />
+    <None Include="Matrix3.inl" />
+    <None Include="Matrix4.inl" />
+    <None Include="Utilities.inl" />
+    <None Include="Vector2.inl" />
+    <None Include="Vector3.inl" />
+    <None Include="Vector4.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

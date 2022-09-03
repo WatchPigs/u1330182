@@ -144,6 +144,27 @@
     <ClInclude Include="Pointers.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Vector4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities-inl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Vector2.cpp">
@@ -221,6 +242,24 @@
     <ClCompile Include="Test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Vector4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix4.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix4.SEE.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Engine.rc">
@@ -231,6 +270,24 @@
     <None Include="Engine.aps" />
     <None Include="HashedString.inl">
       <Filter>Header Files\Types</Filter>
+    </None>
+    <None Include="Utilities.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Vector4.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Vector3.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Matrix3.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Matrix4.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Vector2.inl">
+      <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
 </Project>

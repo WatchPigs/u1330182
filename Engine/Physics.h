@@ -26,13 +26,6 @@ namespace Engine
 		typedef SmartPtr<Moveable> MoveablePtr;
 		typedef WeakPtr<Moveable> WeakMoveablePtr;
 
-		//std::vector<MoveablePtr> AllMoveables;
-		//std::vector<Moveable> NewMoveables;
-
-		//bool bShutdown = false;
-
-		//Mutex NewMoveablesMutex;
-
 		WeakMoveablePtr GetMoveableForGameObject(const SmartPtr<GameObject>& i_GameObject);
 		void AddMoveable(SmartPtr<GameObject>& i_GameObject, nlohmann::json& i_JSON);
 		void ApplyForceToMoveable(MoveablePtr& i_Moveable, const Engine::Vector2 i_Forces);
@@ -42,8 +35,6 @@ namespace Engine
 
 		void Init();
 		void Shutdown();
-
-		//Bootstrapper PhysicsBootstrapper(std::bind(Init), std::bind(Shutdown));
 	}
 }
 

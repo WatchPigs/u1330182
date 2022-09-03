@@ -1,10 +1,9 @@
-#include "Vector2.h"
+#include "Vector3.h"
 
-namespace Engine
-{
-	const Vector2 Vector2::Zero(0.0f, 0.0f);
+namespace Engine {
+	const Vector3 Vector3::Zero(0.0f, 0.0f, 0.0f);
 
-	void Vector2::Normalize()
+	void Vector3::Normalize()
 	{
 		float length = Length();
 
@@ -14,10 +13,11 @@ namespace Engine
 
 			m_x *= inv_length;
 			m_y *= inv_length;
+			m_z *= inv_length;
 		}
 	}
 
-	Vector2 Vector2::Normalized() const
+	Vector3 Vector3::Normalized() const
 	{
 		float length = Length();
 
